@@ -70,7 +70,8 @@ class TagFile(object):
     def _expand_path(self, path):
         path = os.path.expandvars(os.path.expanduser(path))
         if IS_WINDOWS:
-            path = path.encode('utf-8')
+            if int(sublime.version()) < 3000:
+                path = path.encode('utf-8')
         return path
 
     def __init__(self, root_dir=None, extra_paths=[]):
